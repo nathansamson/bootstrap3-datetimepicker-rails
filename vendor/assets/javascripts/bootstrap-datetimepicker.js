@@ -717,7 +717,7 @@
                     targetMoment.minutes((Math.round(targetMoment.minutes() / options.stepping) * options.stepping) % 60).seconds(0);
                 }
 
-                if (isValid(targetMoment)) {
+                if (targetMoment.isValid()) {
                     date = targetMoment;
                     viewDate = date.clone();
                     input.val(date.format(actualFormat));
