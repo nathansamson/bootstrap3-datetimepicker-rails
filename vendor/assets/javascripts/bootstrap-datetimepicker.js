@@ -717,7 +717,7 @@
                     targetMoment.minutes((Math.round(targetMoment.minutes() / options.stepping) * options.stepping) % 60).seconds(0);
                 }
 
-                if (targetMoment.isValid()) {
+                if (isValid(targetMoment)) {
                     date = targetMoment;
                     viewDate = date.clone();
                     input.val(date.format(actualFormat));
@@ -731,7 +731,9 @@
                     });
                 } else {
                     if (!options.keepInvalid) {
-                        input.val(unset ? '' : date.format(actualFormat));
+                        input.val(unset ? '' : targetMoment.format(actualFormat));
+                    } else if ((options.keepInvalid) && (targetMoment.isValid())) {
+                      input.val(targetMoment.format(actualFormat));
                     }
                     notifyEvent({
                         type: 'dp.error',
